@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\ScaleResolution.cs" />
     <Compile Include="Assets\Scripts\SetLevel.cs" />
+    <Compile Include="Assets\Scripts\Sound.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/Github/Catch the Eggs/Catch the Eggs/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

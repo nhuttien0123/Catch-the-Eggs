@@ -8,6 +8,7 @@ public class Gamemaster : MonoBehaviour
 {
     Basket b;
     float random;
+    Sound sound;
     public bool pause = false;
 
     public GameObject Chicken, Over, Pause;
@@ -17,6 +18,7 @@ public class Gamemaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sound = GameObject.FindGameObjectWithTag("Sound").GetComponent<Sound>();
         b = GameObject.FindGameObjectWithTag("Player").GetComponent<Basket>();
     }
 
@@ -45,11 +47,6 @@ public class Gamemaster : MonoBehaviour
             c.GetComponent<Chicken>().identity = 2;
         }
 
-        //Game Over
-        if(b.hp < 0.5f)
-        {
-            StartCoroutine(GameOver());
-        }
 
         //Game Pause
         if(Input.GetKeyDown(KeyCode.Escape))
@@ -74,6 +71,7 @@ public class Gamemaster : MonoBehaviour
         if (col.CompareTag("egg"))
         {
             b.hp--;
+            sound.play("brokenegg");
             Destroy(col.gameObject);
         }
         else
@@ -81,13 +79,4 @@ public class Gamemaster : MonoBehaviour
     }
 
 
-    IEnumerator GameOver()
-    {
-        Over.SetActive(true);
-        if (point > PlayerPrefs.GetInt("highscore"))
-            PlayerPrefs.SetInt("highscore", point);
-        yield return new WaitForSecondsRealtime(0.2f);
-        pause = true;
-        yield return 0;
-    }
 }

@@ -7,6 +7,8 @@ public class Highscore : MonoBehaviour
 {
     public Text hstxt;
 
+    public GameObject panel, ann;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,8 +24,20 @@ public class Highscore : MonoBehaviour
 
     public void ClearHS()
     {
+        panel.SetActive(true);
+        ann.SetActive(true);
+    }
+    public void Yes()
+    {
         PlayerPrefs.DeleteKey("highscore");
         UpdateHS();
+        panel.SetActive(false);
+        ann.SetActive(false);
+    }
+    public void No()
+    {
+        panel.SetActive(false);
+        ann.SetActive(false);
     }
 
 }

@@ -8,6 +8,7 @@ public class Basket : MonoBehaviour
     Vector3 mouseclick, clickposition;
     Animator hpanim;
     bool isMoving;
+    Sound sound;
 
     Gamemaster gm;
     public int hp,eggs;
@@ -15,6 +16,7 @@ public class Basket : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        sound = GameObject.FindGameObjectWithTag("Sound").GetComponent<Sound>();
         dropspeed = 2;
         if (PlayerPrefs.HasKey("level"))
             dropspeed = PlayerPrefs.GetInt("level") + 1;
@@ -27,6 +29,11 @@ public class Basket : MonoBehaviour
     void FixedUpdate()
     {
         hpanim.SetInteger("HP", hp);
+
+        if(hp == 0)
+        {
+            GameOver();
+        }
 
         if(eggs == 20)
         {
@@ -77,12 +84,24 @@ public class Basket : MonoBehaviour
             gm.point++;
             eggs++;
             Destroy(col.gameObject);
+            sound.play("catchegg");
         }
         if (col.CompareTag("shit"))
         {
             gm.point--;
             hp--;
             Destroy(col.gameObject);
+            if(hp>0.5f)
+                sound.play("catchshit");
         }
+    }
+
+    void GameOver()
+    {
+        gm.Over.SetActive(true);
+        if (gm.point > PlayerPrefs.GetInt("highscore"))
+            PlayerPrefs.SetInt("highscore", gm.point);
+        gm.pause = true;
+        sound.play("gameover");
     }
 }
