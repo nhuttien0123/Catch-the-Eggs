@@ -20,7 +20,7 @@ public class Sound : MonoBehaviour
     {
         switch(clip)
         {
-            case "catchegg": ads.PlayOneShot(catchegg,1.4f); break;
+            case "catchegg": ads.PlayOneShot(catchegg,2f); break;
             case "catchshit": ads.PlayOneShot(catchshit); break;
             case "gameover": ads.PlayOneShot(gameover); break;
             case "brokenegg": ads.PlayOneShot(brokenegg); break;

@@ -17,10 +17,7 @@ public class ButtonMenu : MonoBehaviour
         PlayerPrefs.SetInt("level", 1);
         SceneManager.LoadScene(1);
     }
-    public void SetLevel()
-    {
-        SceneManager.LoadScene(4);
-    }
+    
     public void Help()
     {
         SceneManager.LoadScene(2);
@@ -28,6 +25,14 @@ public class ButtonMenu : MonoBehaviour
     public void NextHelp()
     {
         SceneManager.LoadScene(3);
+    }
+    public void SetLevel()
+    {
+        SceneManager.LoadScene(4);
+    }
+    public void Basket()
+    {
+        SceneManager.LoadScene(5);
     }
     public void Resume()
     {
