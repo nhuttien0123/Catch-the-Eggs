@@ -7,11 +7,6 @@ public class ButtonMenu : MonoBehaviour
 {
     Gamemaster gm;
 
-    private void Start()
-    {
-        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<Gamemaster>();
-    }
-
     public void Play()
     {
         PlayerPrefs.SetInt("level", 1);
@@ -34,8 +29,13 @@ public class ButtonMenu : MonoBehaviour
     {
         SceneManager.LoadScene(5);
     }
+    public void HighscoreBoard()
+    {
+        SceneManager.LoadScene(6);
+    }
     public void Resume()
     {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<Gamemaster>();
         gm.pause = false;
     }
     public void Menu()

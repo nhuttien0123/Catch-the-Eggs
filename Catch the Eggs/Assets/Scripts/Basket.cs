@@ -7,12 +7,12 @@ public class Basket : MonoBehaviour
     Rigidbody2D r2;
     Vector3 mouseclick, clickposition;
     Animator hpanim, anim;
-    bool isMoving;
     Sound sound;
     int skin = 0;
 
     Gamemaster gm;
     public int hp,eggs;
+    public bool isMoving;
     public float speed, h, dropspeed;
     // Start is called before the first frame update
     void Start()
@@ -40,10 +40,6 @@ public class Basket : MonoBehaviour
         anim.SetInteger("Skin", skin);
         hpanim.SetInteger("HP", hp);
 
-        if (hp == 0)
-        {
-            GameOver();
-        }
 
         if (eggs == 20)
         {
@@ -56,7 +52,8 @@ public class Basket : MonoBehaviour
         {
             clickposition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             mouseclick = new Vector3(clickposition.x, transform.position.y, transform.position.z);
-            isMoving = true; Debug.Log("Click");
+            if(clickposition.y < 0 && !gm.pause)
+                isMoving = true;
         }
         //Di chuyển bằng chuột
         if (isMoving)
@@ -77,7 +74,7 @@ public class Basket : MonoBehaviour
         }
         if (Input.GetKeyUp(KeyCode.Keypad6) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.Keypad4) || Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            r2.velocity = new Vector2(0, 0); Debug.Log("Up");
+            r2.velocity = new Vector2(0, 0);
         }
 
         
@@ -110,15 +107,5 @@ public class Basket : MonoBehaviour
         }
     }
 
-    void GameOver()
-    {
-        gm.Over.SetActive(true);
-        if (gm.point > PlayerPrefs.GetInt("highscore"))
-        { 
-            PlayerPrefs.SetInt("highscore", gm.point);
-        }
-        
-        gm.pause = true; hp--;
-        sound.play("gameover");
-    }
+    
 }

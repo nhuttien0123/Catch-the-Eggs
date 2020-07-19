@@ -9,17 +9,19 @@ public class Gamemaster : MonoBehaviour
     Basket b;
     float random;
     Sound sound;
+    Highscore hs;
     public bool pause = false;
 
-    public GameObject Chicken, Over, Pause;
+    public GameObject Chicken, Over, OverHS, Pause;
     public Transform sL, sR;
-    public Text pointtxt;
+    public Text pointtxt, ranktxt, nametxt;
     public int point;
     // Start is called before the first frame update
     void Start()
     {
         sound = GameObject.FindGameObjectWithTag("Sound").GetComponent<Sound>();
         b = GameObject.FindGameObjectWithTag("Player").GetComponent<Basket>();
+        hs = gameObject.GetComponent<Highscore>();
     }
 
     // Update is called once per frame
@@ -52,16 +54,24 @@ public class Gamemaster : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             pause = true;
-            Pause.SetActive(true);
         }
         if(pause)
         {
             Time.timeScale = 0f;
+            b.isMoving = false;
+            if(Pause != null)
+                Pause.SetActive(true);
         }
         if(!pause)
         {
             Time.timeScale = 1f;
-            Pause.SetActive(false);
+            if (Pause != null)
+                Pause.SetActive(false);
+        }
+
+        if (b.hp == 0)
+        {
+            StartCoroutine(GameOver());
         }
     }
 
@@ -77,6 +87,34 @@ public class Gamemaster : MonoBehaviour
         else
             Destroy(col.gameObject);
     }
+    IEnumerator GameOver()
+    {
+        int r = hs.GetRank(point);
+        if (r <= 5)
+        {
+            ranktxt.text = "Rank: " + r;
+            OverHS.SetActive(true);
+        }
+        else
+        {
+            Over.SetActive(true);
+        }
+        if (point > PlayerPrefs.GetInt("highscore"))
+        {
+            PlayerPrefs.SetInt("highscore", point);
+        }
+        b.hp--;
 
+        sound.play("gameover");
+        Destroy(Pause);
+        yield return new WaitForSeconds(0.1f);
+        pause = true;
+        yield return 0;
+    }
+    public void SaveHS()
+    {
+        hs.UpdateHSB(hs.GetRank(point), nametxt.text, point);
+        SceneManager.LoadScene(0);
+    }
 
 }

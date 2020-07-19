@@ -66,10 +66,13 @@
     <Compile Include="Assets\Scripts\Basket.cs" />
     <Compile Include="Assets\Scripts\ButtonBasket.cs" />
     <Compile Include="Assets\Scripts\ButtonMenu.cs" />
+    <Compile Include="Assets\Scripts\ButtonPause.cs" />
+    <Compile Include="Assets\Scripts\ButtonVolume.cs" />
     <Compile Include="Assets\Scripts\Chicken.cs" />
     <Compile Include="Assets\Scripts\Fallen.cs" />
     <Compile Include="Assets\Scripts\Gamemaster.cs" />
     <Compile Include="Assets\Scripts\Highscore.cs" />
+    <Compile Include="Assets\Scripts\Highscores.cs" />
     <Compile Include="Assets\Scripts\Level.cs" />
     <Compile Include="Assets\Scripts\ScaleResolution.cs" />
     <Compile Include="Assets\Scripts\SelectBasket.cs" />
