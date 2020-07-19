@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fallen : MonoBehaviour
+public class Shits : MonoBehaviour
 {
     Rigidbody2D r2;
     public float speed;
@@ -10,10 +10,10 @@ public class Fallen : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        b = GameObject.FindGameObjectWithTag("Player" +
-            "").GetComponent<Basket>();
+        b = GameObject.FindGameObjectWithTag("Player").GetComponent<Basket>();
         speed = b.dropspeed;
         r2 = gameObject.GetComponent<Rigidbody2D>();
+        Destroy(gameObject, 5);
     }
 
     // Update is called once per frame

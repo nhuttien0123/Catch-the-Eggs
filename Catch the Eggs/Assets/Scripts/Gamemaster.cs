@@ -82,10 +82,9 @@ public class Gamemaster : MonoBehaviour
         {
             b.hp--;
             sound.play("brokenegg");
-            Destroy(col.gameObject);
         }
-        else
-            Destroy(col.gameObject);
+        //else
+            //Destroy(col.gameObject);
     }
     IEnumerator GameOver()
     {
