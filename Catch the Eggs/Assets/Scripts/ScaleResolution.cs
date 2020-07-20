@@ -1,27 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScaleResolution : MonoBehaviour
 {
-    public Camera cam;
+    bool isWider;
+    float gameratio, screenratio;
+    public SpriteRenderer back;
     // Start is called before the first frame update
     void Start()
     {
-        ScaleResolutionScreen();
-    }
-    //chỉnh tỉ lệ màn hình
-    void ScaleResolutionScreen()
-    {
-        if ((Screen.height / Screen.width) > (16 / 9))
+        screenratio = (float)Screen.width / (float)Screen.height;
+        gameratio = 9f / 16f;
+        if (screenratio < gameratio)
+            isWider = true;
+        else
+            isWider = false;
+        if (back != null)
         {
-            int sw = Screen.width, sh = sw * 16 / 9;
-            Screen.SetResolution(sw, sh, FullScreenMode.Windowed);
+            if (isWider)
+                Camera.main.orthographicSize = back.bounds.size.x;
+            else
+                Camera.main.orthographicSize = back.bounds.size.y / 2;
         }
-        if ((Screen.height / Screen.width) < (16 / 9))
-        {
-            int sh = Screen.height, sw = sh / 16 * 9;
-            Screen.SetResolution(sw, sh, FullScreenMode.Windowed);
-        }
+        Screen.fullScreenMode = FullScreenMode.Windowed;
+        
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Highscores : MonoBehaviour
 {
-    public Text tn1, tn2, tn3, tn4, tn5, ths1, ths2, ths3, ths4, ths5;
+    public Text tn1, tn2, tn3, tn4, tn5, ths1, ths2, ths3, ths4, ths5; 
     // Start is called before the first frame update
     void Start()
     {

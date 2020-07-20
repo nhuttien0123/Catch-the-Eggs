@@ -105,7 +105,14 @@ public class Basket : MonoBehaviour
             if(hp>0.5f)
                 sound.play("catchshit");
         }
+        if (col.CompareTag("LimitMap"))
+            isMoving = false;
+    }
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.CompareTag("LimitMap"))
+            isMoving = false;
     }
 
-    
+
 }

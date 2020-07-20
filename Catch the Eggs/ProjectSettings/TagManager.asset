@@ -10,6 +10,7 @@ TagManager:
   - GM
   - HP
   - Sound
+  - LimitMap
   layers:
   - Default
   - TransparentFX
